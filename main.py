@@ -1,56 +1,26 @@
-from sorting_algorithms.quick_sort import quick_sort
+from utils import test_sort, get_results
 from sorting_algorithms.selection_sort import selection_sort
-from typing import List
+from sorting_algorithms.bubble_sort import bubble_sort
+from sorting_algorithms.quick_sort import quick_sort
 
-
-def check_in_sequence(list_one: List, list_two: List) -> bool:
-    for x in range(len(list_one)):
-        if list_one[x] != list_two[x]:
-            return False
-    return True
-
+from constants.settings import MY_LIST
 
 if __name__ == '__main__':
-    SUCCESS = 'SUCCESS::'
-    FAIL = 'FAIL::'
+    # Test A sorted list with Selection sort list
+    test_sort('Selection', selection_sort(MY_LIST))
 
-    my_list = [26, 12, 23, 10, 24, 27, 29]
-    sorted_list = [10, 12, 23, 24, 26, 27, 29]
-    result = ''
+    # Test B sorted list with Bubble sort list
+    test_sort('Bubble', bubble_sort(MY_LIST))
 
-    # Test A Check created list with sorted list
-    print('\nTest A: Check created list with created list')
-    if not check_in_sequence(my_list, sorted_list):
-        print(f'{SUCCESS}')
-        print(f'Original List: {my_list}')
-        print(f'Sorted List: {sorted_list}')
-        result += 'A'
-    else:
-        print(f'{FAIL}Problem with check in sequence function')
-        result += '-'
+    # Test C sorted list with Insertion sort list
+    # test_sort('Insertion', insertion_sort(MY_LIST))
 
-    # Test B Check list with quick sort list
-    print('\nTest B: Check created list with quick sort list')
-    if check_in_sequence(sorted_list, quick_sort(my_list)):
-        print(f'{SUCCESS}Quick Sort List: {my_list}')
-        result += 'B'
-    else:
-        print(f'{FAIL}List not sorted')
-        print(f'Expected Output: {sorted_list}')
-        print(f'Actual Output: {quick_sort(my_list)}')
-        result += '-'
+    # Test D sorted list with Merge sort list
+    # test_sort('Merge', merge_sort(MY_LIST))
 
-    # Test C Check list with selection sort list
-    print('\nTest C: Check created list with selection sort list')
-    if check_in_sequence(sorted_list, selection_sort(my_list)):
-        print(f'{SUCCESS}Selection Sort List: {my_list}')
-        result += 'C'
-    else:
-        print(f'{FAIL}List not sorted')
-        print(f'Expected Output: {sorted_list}')
-        print(f'Actual Output: {selection_sort(my_list)}')
-        result += '-'
+    # Test E sorted list with Quick sort list
+    test_sort('Quick', quick_sort(MY_LIST))
 
     # Display Summary of the results
     print('\n\n------------------------------------ SUMMARY ------------------------------------')
-    print('Tests passed: ', result)
+    print('Tests passed: ', get_results())
